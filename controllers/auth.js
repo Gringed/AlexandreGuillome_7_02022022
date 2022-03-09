@@ -38,15 +38,29 @@ module.exports.signUp = async (req, res) => {
 }
 module.exports.signIn = async (req, res) => {
     const { email, password } = req.body
-
     try {
-        const user = await User.findOne(email, password);
-        const token = createToken(user._id);
-        res.cookie('jwt', token, { httpOnly: true, maxAge });
-        res.status(200).json({ user: user._id })
-    } catch (err) {
-        const errors = signInErrors(err);
-        res.status(200).json({ errors });
+        if (!email || !password) {
+            res.status(400).send({ message: "Les champs ne doivent pas être vides" });
+            return;
+        }
+        const recupUser = await User.findOne({ where: { email: email } })
+
+        if (!recupUser) {
+            return res.status(401).json({ error: 'Utilisateur non trouvé' })
+        }
+        const hashPass = await bcrypt.compare(password, recupUser.password)
+
+        if (!hashPass)
+            return res.status(401).json({ error: 'Mot de passe incorrect' })
+        else {
+            const token = createToken(recupUser.id);
+            res.cookie('jwt', token, { httpOnly: true, maxAge })
+            res.status(201).json({ message: "Connexion réussie avec succès" })
+        }
+    }
+    catch (err) {
+        const errors = signInErrors(err)
+        res.status(400).send({ errors })
     }
 }
 
