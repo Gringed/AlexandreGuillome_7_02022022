@@ -5,15 +5,18 @@ const Likes = db.likes;
 const Comments = db.comments;
 const validator = require('validator');
 const { uploadErrors } = require('../utils/errors');
+const multer = require('../middleware/multerPost');
 
 module.exports.readPost = async (req, res) => {
-    await Post.findAll({
+    const allPost = await Post.findAll({order: [['createdAt', 'DESC']]},{
         attributes: ['id', 'userId', 'imagePost', 'message', 'likes', 'usersLiked', 'comments', 'createdAt', 'updatedAt']
-    }).sort({ createdAt: -1 })
-        .then((valid) => {
-            res.status(201).json(valid)
-        })
-        .catch((err) => { res.status(200).json({ err }) })
+    })
+    
+        if(allPost)
+            res.status(201).json(allPost)
+        else
+        res.status(400).json({message: "Requête impossible"})
+    
 };
 
 module.exports.createPost = async (req, res) => {
@@ -31,7 +34,8 @@ module.exports.createPost = async (req, res) => {
             const errors = uploadErrors(err)
             return res.status(400).send({errors})
         }
-        filename = req.body.id + req.file.originalname.split('.')[0] + '.png';
+        multer.storage = "test"
+        filename = req.originalUrl.split("=")[1] + req.file.originalname.split('.')[0] + '.png';
     }
 
     const { userId, message } = req.body
@@ -94,7 +98,7 @@ module.exports.likePost = async (req, res) => {
             recupPost.update(updatePostLikes)
 
         const newPostLikes = {
-            idUserLike: req.body.id,
+            idUserLike: req.body.idUserLike,
             idPost: req.params.id
         }
         await Likes.create(newPostLikes)
