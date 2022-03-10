@@ -1,11 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import Navbar from '../Navbar';
 import Home from '../../pages/Home';
 import Profil from '../../pages/Profil';
 import Trending from '../../pages/Trending';
 const index = () => {
     return (
         <Router>
+            <Navbar />
             <Routes>
                 <Route path='/' exact element={<Home />} />
                 <Route path='/profil' exact element={<Profil />} />

@@ -14,10 +14,6 @@ const createToken = (id) => {
 module.exports.signUp = async (req, res) => {
     const { email, firstName, lastName, password } = req.body
 
-    if (!email || !password || !firstName || !lastName) {
-        res.status(400).send({ message: "Les champs ne doivent pas être vides" });
-        return;
-    }
     const salt = bcrypt.genSaltSync();
     const hash = bcrypt.hashSync(password, salt);
     const users = {
@@ -32,36 +28,37 @@ module.exports.signUp = async (req, res) => {
         const newUser = await User.create(users)
         return res.status(201).json(newUser)
     } catch (err) {
-        return res.status(400).send(err);
+        const errors = signUpErrors(err)
+        res.status(200).json({ errors })
     }
 
 }
 module.exports.signIn = async (req, res) => {
     const { email, password } = req.body
+
+    User.login = async function(email, password) {
+        const user = await User.findOne({where: {email: email} });
+        if (user) {
+            const auth = await bcrypt.compare(password, user.password);
+            if (auth) {
+            return user
+            }
+            throw Error('incorrect password');
+        }
+        throw Error('incorrect email');
+    }
+    
     try {
-        if (!email || !password) {
-            res.status(400).send({ message: "Les champs ne doivent pas être vides" });
-            return;
-        }
-        const recupUser = await User.findOne({ where: { email: email } })
-
-        if (!recupUser) {
-            return res.status(401).json({ error: 'Utilisateur non trouvé' })
-        }
-        const hashPass = await bcrypt.compare(password, recupUser.password)
-
-        if (!hashPass)
-            return res.status(401).json({ error: 'Mot de passe incorrect' })
-        else {
-            const token = createToken(recupUser.id);
-            res.cookie('jwt', token, { httpOnly: true, maxAge })
-            res.status(201).json({ message: "Connexion réussie avec succès" })
-        }
-    }
-    catch (err) {
-        const errors = signInErrors(err)
-        res.status(400).send({ errors })
-    }
+        const user = await User.login(email, password)
+        const token = createToken(user.id);
+        res.cookie('jwt', token, { httpOnly: true, maxAge});
+        res.status(200).json({user: user.id})
+        
+      } catch (err){
+        const errors = signInErrors(err);
+        res.status(200).json({ errors });
+      }
+    
 }
 
 module.exports.logout = (req, res) => {
