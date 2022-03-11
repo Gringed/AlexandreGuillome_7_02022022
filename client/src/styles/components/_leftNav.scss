@@ -1,37 +1,32 @@
 .left-nav-container {
-  position: relative;
-
-  .icons {
-    position: fixed;
-    z-index: 10;
+  display: flex;
 
     @media screen and(max-width: 590px) {
       margin: 2px 0 0 -9px;
     }
 
-    .icons-bis {
-      position: absolute;
-      left: 10px;
-
+    .icons {
+      display: flex;
+      font-size: 2.5rem;
+      color: black;
+      align-items: center;
+      .ico{
+        color: $color-3;
+      }
+      .fav{
+        color: $color-1;
+      }
       a {
-        transition: 0.1s;
-        display: inline-block;
-
-        &:before {
-          transition: .15s ease;
-          transform: scale(0);
-          transform-origin: center;
-          z-index: -10;
-          content: "";
-          height: 45px;
-          width: 45px;
-          position: absolute;
-          background: $color-4;
+        transition: 0.2s;
+        display: flex;
+        padding: 0 10px 5px 10px;
+        transition: .15s ease;
+          transform: scale(0.9);
           border-radius: 50px;
-        }
+        
 
         &:hover {
-          transform: scale(1.02);
+          transform: scale(1);
         }
         &:hover::before {
           transform: scale(1);
@@ -51,19 +46,7 @@
       }
 
       .active-left-nav {
-        position: relative;
-
-        &::after {
-          content: "";
-          height: 40px;
-          width: 5px;
-          position: absolute;
-          background: $color-1;
-          left: -7px;
-          bottom: 8px;
-          border-radius: 40px;
-          transform: scaleY(0);
-          animation: scale 1.5s ease forwards;
+        border-top: 5px solid $color-1;
 
           @keyframes scale {
             to {
@@ -75,7 +58,7 @@
             left: -8px;
           }
         }
-      }
+      
     }
-  }
+  
 }

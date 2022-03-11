@@ -1,4 +1,5 @@
 import React from "react";
+import * as Icons from "react-icons/bi"
 import axios from "axios";
 import cookie from "js-cookie";
 
@@ -23,7 +24,7 @@ const Logout = () => {
 
   return (
     <li onClick={logout}>
-      <img className="navlink-logout" src="./img/icons/logout.svg" alt="logout" />
+      <Icons.BiLogOut className="ico"/>
     </li>
   );
 };

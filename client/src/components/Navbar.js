@@ -1,7 +1,9 @@
 import React, { useContext } from "react";
+import * as Icons from "react-icons/bi";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { UidContext } from "./AppContext";
+import AsideNav from "./AsideNav";
 import Logout from "./Log/Logout";
 
 const Navbar = () => {
@@ -18,9 +20,9 @@ const Navbar = () => {
             </div>
           </NavLink>
         </div>
+        <AsideNav />
         {uid ? (
           <ul>
-            
             <li className="welcome">
               <NavLink to="/profil" className="navlink">
                 <img src={`${userData.avatar}`} alt={userData.avatar} />
@@ -36,7 +38,7 @@ const Navbar = () => {
             <li></li>
             <li className="welcome">
               <NavLink to="/profil">
-                <img src="./img/icons/login.svg" alt="login" />
+                <Icons.BiLogIn />
               </NavLink>
             </li>
           </ul>

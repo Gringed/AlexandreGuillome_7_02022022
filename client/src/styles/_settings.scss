@@ -1,19 +1,18 @@
 @font-face {
-  font-family: "font-1";
-  src: url(./assets/fonts/JosefinSans-ExtraLight.ttf);
+  font-family: "Outfit";
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;400&display=swap');
+  font-weight: 200;
 }
 @font-face {
-  font-family: "font-2";
-  src: url(./assets/fonts/JosefinSans-Regular.ttf);
-}
-@font-face {
-  font-family: "font-3";
-  src: url(./assets/fonts/JosefinSans-Bold.ttf);
+  font-family: "Outfit";
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;400&display=swap');
+  font-weight: 400;
 }
 
-$font-1: "font-1", sans-serif;
-$font-2: "font-2", serif;
-$font-3: "font-3", serif;
+
+$font-1: "Outfit", sans-serif;
+$font-2: "Outfit", serif;
+$font-3: "Outfit", serif;
 
 $color-1: #fd2c00;
 $color-2: #ffd0c4;

@@ -1,24 +1,25 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import * as Icons from "react-icons/bi";
+import { NavLink } from "react-router-dom";
 
 const AsideNav = () => {
-    return (
-        <div className='left-nav-container'>
-            <div className='icons'>
-                <NavLink to='/' activeClassName="active-left-nav">
-                    <img src='./img/icons/home.svg' alt='home' />
-                </NavLink>
-                <br />
-                <NavLink to='/trending' activeClassName="active-left-nav">
-                    <img src='./img/icons/rocket.svg' alt='rocket' />
-                </NavLink>
-                <br />
-                <NavLink to='/profil' activeClassName="active-left-nav">
-                    <img src='./img/icons/user.svg' alt='user' />
-                </NavLink>
-            </div>
-        </div>
-    );
+  return (
+    <div className="left-nav-container">
+      <div className="icons">
+        <NavLink to="/trending" className={({ isActive }) =>  "" + (isActive ? "active-left-nav" : "")} >
+          <Icons.BiRocket className="ico"/>
+        </NavLink>
+        <br />
+        <NavLink to="/" className={({ isActive }) =>  "" + (isActive ? "active-left-nav" : "")}>
+        <Icons.BiHome className="ico fav"/>
+        </NavLink>
+        <br />
+        <NavLink to="/profil" className={({ isActive }) =>  "" + (isActive ? "active-left-nav" : "")}>
+        <Icons.BiUser className="ico"/>
+        </NavLink>
+      </div>
+    </div>
+  );
 };
 
 export default AsideNav;

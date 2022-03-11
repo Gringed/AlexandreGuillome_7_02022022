@@ -16,6 +16,9 @@ module.exports = (sequelize, Sequelize) => {
         userId: {
             type: Sequelize.STRING,
         },
+        comments: {
+            type: Sequelize.INTEGER
+        }
 
     }, {
         hooks: {
