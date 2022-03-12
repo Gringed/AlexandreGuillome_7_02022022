@@ -7,7 +7,7 @@ const Home = () => {
   const uid = useContext(UidContext);
   return (
     <div className="home">
-      {uid ? <div></div> : <div>test</div>}
+      <div></div>
       <div className="main">
         <Feed />
       </div>

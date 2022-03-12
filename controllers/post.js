@@ -6,11 +6,13 @@ const Comments = db.comments;
 const validator = require('validator');
 const { uploadErrors } = require('../utils/errors');
 const multer = require('../middleware/multerPost');
+const likes = require('../models/likes');
+
 
 module.exports.readPost = async (req, res) => {
-    const allPost = await Post.findAll({order: [['createdAt', 'DESC']]},{
-        attributes: ['id', 'userId', 'imagePost', 'message', 'likes', 'usersLiked', 'comments', 'createdAt', 'updatedAt']
-    })
+    const allPost = await Post.findAll({order: [['createdAt', 'DESC']]},{include: likes
+    });
+    console.log(JSON.stringify(allPost, null, 2));
     
         if(allPost)
             res.status(201).json(allPost)
@@ -85,12 +87,24 @@ module.exports.deletePost = async (req, res) => {
     res.status(201).json({ message: "Post supprimé !" })
 };
 
+module.exports.allLikes = async (req, res) => {
+    const allLikes = await Likes.findAll({
+        attributes: ['id', 'idUserLike', 'idPost']
+    })
+    
+        if(allLikes)
+            res.status(201).json(allLikes)
+        else
+        res.status(400).json({message: "Requête impossible"})
+    
+};
+
 module.exports.likePost = async (req, res) => {
     if (!validator.isInt(req.params.id))
         return res.status(400).json({ message: "Id inconnue" })
 
     try {
-        const recupPost = await Post.findOne({ where: { id: req.params.id }, attributes: ['id', 'likes'] })
+        const recupPost = await Post.findOne({ where: { id: req.params.id }, attributes: ['id', 'likes']})
         const updatePostLikes = {
             likes: recupPost.likes + 1
         }

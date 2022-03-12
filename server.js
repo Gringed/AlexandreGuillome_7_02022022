@@ -5,7 +5,8 @@ const postRoutes = require('./routes/post')
 require('dotenv').config({ path: './config/.env' })
 require("./config/db");
 const { checkToken, requireAuth } = require('./middleware/auth')
-const cors = require('cors')
+const cors = require('cors');
+const db = require('./config/db');
 const app = express();
 
 //Cors
@@ -35,6 +36,9 @@ app.use('/api/user', userRoutes);
 app.use('/api/post', postRoutes);
 
 // Server entry
-app.listen(process.env.PORT, () => {
-    console.log(`Listening on port ${process.env.PORT}`)
+db.sequelize.sync().then(() => {
+    app.listen(process.env.PORT, () => {
+        console.log(`Listening on port ${process.env.PORT}`)
+    })
 })
+

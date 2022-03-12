@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as Icons from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
-import { getPosts } from "../../actions/posts.actions";
+import { getLikes, getPosts } from "../../actions/posts.actions";
 import Card from "./Card";
 const Feed = () => {
   const [loadPost, setLoadPost] = useState(true);
@@ -11,6 +11,7 @@ const Feed = () => {
   useEffect(() => {
       if(loadPost){
           dispatch(getPosts());
+          dispatch(getLikes)
           setLoadPost(false);
       }
   }, [loadPost, dispatch])

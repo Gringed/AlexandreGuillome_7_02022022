@@ -4,10 +4,9 @@ import { useSelector } from "react-redux";
 import { dateParse } from "../Utils";
 import LikeButton from "./LikeButton";
 
-const Card = ({ post }) => {
+const Card = ({ post, likes }) => {
   const [isLoading, setIsLoading] = useState(true);
   const usersData = useSelector((state) => state.usersReducer);
-  const userData = useSelector((state) => state.userReducer);
 
   useEffect(() => {
     usersData && setIsLoading(false);
@@ -54,7 +53,7 @@ const Card = ({ post }) => {
                     <Icons.BiCommentDetail />
                     <span>{post.comments}</span>
                 </div>
-                <LikeButton likes={post}/>
+                <LikeButton post={post} likes={likes}/>
             </div>
           </div>
         </>

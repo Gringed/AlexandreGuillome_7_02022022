@@ -9,6 +9,7 @@ router.put('/:id', postCtrl.updatePost)
 router.delete('/:id', postCtrl.deletePost)
 
 //Like
+router.get('/likes', postCtrl.allLikes)
 router.put('/like-post/:id', postCtrl.likePost)
 router.put('/unlike-post/:id', postCtrl.unLikePost)
 
