@@ -1,10 +1,8 @@
-import React, { useContext } from "react";
-import { UidContext } from "../components/AppContext";
+import React from "react";
 import Feed from "../components/Post/Feed";
 
 const Home = () => {
   
-  const uid = useContext(UidContext);
   return (
     <div className="home">
       <div></div>

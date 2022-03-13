@@ -6,14 +6,11 @@ const Comments = db.comments;
 const validator = require('validator');
 const { uploadErrors } = require('../utils/errors');
 const multer = require('../middleware/multerPost');
-const likes = require('../models/likes');
 
 
 module.exports.readPost = async (req, res) => {
-    const allPost = await Post.findAll({order: [['createdAt', 'DESC']]},{include: likes
+    const allPost = await Post.findAll({order: [['createdAt', 'DESC']]},{include: Likes
     });
-    console.log(JSON.stringify(allPost, null, 2));
-    
         if(allPost)
             res.status(201).json(allPost)
         else
@@ -135,7 +132,7 @@ module.exports.unLikePost = async (req, res) => {
         if (recupPost)
             recupPost.update(updatePostLikes)
 
-        const deleteLike = await Likes.findOne({ where: { idPost: req.params.id }, attributes: ['id', 'idPost'] })
+        const deleteLike = await Likes.findOne({ where: { idUserLike: req.body.idUserLike, idPost: req.params.id}, attributes: ['id', 'idPost', 'idUserLike'] })
         if (!deleteLike)
             return res.status(404).json({ message: 'Like non mis !' })
         if (deleteLike)

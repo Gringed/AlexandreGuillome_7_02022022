@@ -1,20 +1,30 @@
 import React, { useEffect, useState } from "react";
-import * as Icons from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
-import { getLikes, getPosts } from "../../actions/posts.actions";
+import { getPosts } from "../../actions/posts.actions";
+import { getLikes } from "../../actions/likes.actions";
 import Card from "./Card";
 const Feed = () => {
   const [loadPost, setLoadPost] = useState(true);
+  const [count, setCount] = useState(5)
   const dispatch = useDispatch();
   const postsData = useSelector((state) => state.postsReducer);
+  
+  const loadMore = () => {
+    if(window.innerHeight + document.documentElement.scrollTop + 1 > document.scrollingElement.scrollHeight){
+      setLoadPost(true)
+    }
+  }
 
   useEffect(() => {
       if(loadPost){
-          dispatch(getPosts());
-          dispatch(getLikes)
+          dispatch(getPosts(count));
+          dispatch(getLikes())
           setLoadPost(false);
+          setCount(count + 5);
       }
-  }, [loadPost, dispatch])
+      window.addEventListener('scroll', loadMore);
+      return () => window.removeEventListener('sroll', loadMore);
+  }, [loadPost, dispatch, count])
 
   return (
     <><div className="thread-container">

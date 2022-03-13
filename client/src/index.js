@@ -9,7 +9,8 @@ import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers'
 import { getUsers } from './actions/users.actions';
-import {getPosts, getLikes} from './actions/posts.actions';
+import {getPosts} from './actions/posts.actions';
+import { getLikes } from './actions/likes.actions';
 
 //Dev Tools
 import { composeWithDevTools } from 'redux-devtools-extension';

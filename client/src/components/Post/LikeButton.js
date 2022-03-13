@@ -2,25 +2,37 @@ import React, { useContext, useEffect, useState } from 'react';
 import {UidContext} from '../AppContext' 
 import Popup from 'reactjs-popup'
 import 'reactjs-popup/dist/index.css'
-import * as Icons from 'react-icons/bi'
-const LikeButton = ({post, likes}) => {
-    
+import { useDispatch, useSelector } from 'react-redux';
+import { likePost, unLikePost } from '../../actions/posts.actions';
+const LikeButton = ({post}) => {
+    const [likedUp, setLikedUp] = useState(false)
+    const likesData = useSelector((state) => state.likesReducer);
     const [liked, setLiked] = useState(false);
     const uid = useContext(UidContext)
+    const dispatch = useDispatch();
 
-    const handleLike = () => {
-
+    const handleLike = () => { 
+        dispatch(likePost(post.id, uid))
+        setLiked(true)
     }
 
     const handleUnlike = () => {
-
+        dispatch(unLikePost(post.id, uid))
+        setLiked(false)
     }
-
+    const filterId = likesData.find((like => like.idUserLike === uid && like.idPost === post.id) ) 
     useEffect(() => {
-        if(post.idPost === 1) setLiked(true)
+        
+        if (filterId) {
+            setLiked(true);
+        }
+            
+        else{
+            setLiked(false)
+        } 
+        
+    }, [uid, filterId, dispatch])
     
-    }, [uid, post, liked])
-
     return (
        <div className="like-container">
            {!uid &&
@@ -34,6 +46,7 @@ const LikeButton = ({post, likes}) => {
            {uid && liked && (
             <img src='./img/icons/heart-filled.svg' onClick={handleUnlike} alt=""/>
            )}
+           {<span>{post.likes}</span>}
        </div>
     );
 };

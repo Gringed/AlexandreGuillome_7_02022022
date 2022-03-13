@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { dateParse } from "../Utils";
 import UploadImg from "./UploadImg";
 
 const UpdateProfil = () => {
-  const posts = useSelector((state) => state.postsReducer);
+  // const posts = useSelector((state) => state.postsReducer);
   const userData = useSelector((state) => state.userReducer);
 
   return (
