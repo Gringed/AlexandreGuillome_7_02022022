@@ -11,6 +11,7 @@ import rootReducer from './reducers'
 import { getUsers } from './actions/users.actions';
 import {getPosts} from './actions/posts.actions';
 import { getLikes } from './actions/likes.actions';
+import {getComments} from './actions/comments.actions'
 
 //Dev Tools
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -25,6 +26,7 @@ const store = createStore(
 store.dispatch(getUsers())
 store.dispatch(getPosts())
 store.dispatch(getLikes())
+store.dispatch(getComments())
 
 ReactDOM.render(
   <Provider store={store}>

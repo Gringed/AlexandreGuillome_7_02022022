@@ -14,6 +14,7 @@ router.put('/like-post/:id', postCtrl.likePost)
 router.put('/unlike-post/:id', postCtrl.unLikePost)
 
 //Comments
+router.get('/comments', postCtrl.allComments)
 router.post('/comment-post/:id', postCtrl.commentPost)
 router.put('/edit-comment-post/:id', postCtrl.editCommentPost)
 router.delete('/delete-comment-post/:id', postCtrl.deleteCommentPost)

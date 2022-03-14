@@ -96,6 +96,16 @@ module.exports.allLikes = async (req, res) => {
     
 };
 
+module.exports.allComments = async (req, res) => {
+    const allComments = await Comments.findAll({order: [['createdAt', 'ASC']]})
+    
+        if(allComments)
+            res.status(201).json(allComments)
+        else
+        res.status(400).json({message: "Requête impossible"})
+    
+};
+
 module.exports.likePost = async (req, res) => {
     if (!validator.isInt(req.params.id))
         return res.status(400).json({ message: "Id inconnue" })
@@ -198,16 +208,25 @@ module.exports.editCommentPost = async (req, res) => {
 module.exports.deleteCommentPost = async (req, res) => {
     if (!validator.isInt(req.params.id))
         return res.status(400).json({ message: "Id inconnue" })
+        try {
+            const recupPost = await Post.findOne({ where: { id: req.body.idPost }, attributes: ['id', 'comments'] })
 
-    try {
-        const recupComments = await Comments.findOne({ where: { id: req.params.id }, attributes: ['id', 'idPost', 'message'] })
-        if (!recupComments)
-            return res.status(404).send({ message: "Ce commentaire n'existe pas" })
-        else
-            recupComments.destroy(recupComments);
-        res.status(201).json({message : "Message supprimé avec succès"});
+            const numberComments = {
+                comments: recupPost.comments - 1
+            }
+            if (recupPost)
+                recupPost.update(numberComments)
+    
+                const deleteComment = await Comments.findOne({ where: { id: req.params.id, idPost: req.body.idPost}, attributes: ['id', 'idPost', 'userId'] })
+                if (!deleteComment)
+                    return res.status(404).json({ message: 'Commentaire non existant !' })
+                if (deleteComment)
+                    deleteComment.destroy();
+                res.status(201).json({ message: "Commentaire supprimé" })
+        }
+        catch(err) {
+            return res.status(400).json(err)
+        }
+    
 
-    } catch(err) {
-        return res.status(400).json(err)
-    }
 }
