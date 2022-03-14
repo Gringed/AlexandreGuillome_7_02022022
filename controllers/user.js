@@ -44,7 +44,7 @@ module.exports.updateUser = async (req, res) => {
     const nameUrl = req.body.name;
     const userId = req.params.id;
     const objectToUp = {
-        avatar: "./uploads/profil/" + nameUrl + ".jpg"
+        avatar: "./uploads/profil/" + nameUrl + userId + ".jpg"
     }
     const userInfo = await User.findOne({
         attributes: { exclude: ['password'] }, where: { id: userId }

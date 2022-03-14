@@ -16,7 +16,7 @@ const EditDeleteCom = ({ comment, postId }) => {
     e.preventDefault();
 
     if (message) {
-      dispatch(editComment(comment.id, message))
+      dispatch(editComment(comment.idPost, comment.id, message))
         .then(() => dispatch(getComments()))
         .then(() => dispatch(getPosts()));
       setMessage("");
@@ -37,7 +37,7 @@ const EditDeleteCom = ({ comment, postId }) => {
       }
     };
     checkAuthor();
-  }, [uid]);
+  }, [uid, comment.userId]);
 
   return (
     <div className="edit-comment">

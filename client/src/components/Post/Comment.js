@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getComments } from "../../actions/comments.actions";
 import { addComment, getPosts } from "../../actions/posts.actions";
@@ -78,6 +78,7 @@ const Comment = ({ post, comment }) => {
               </div>
             );
           }
+          else return null
         })
       ) : (
         <p>Aucun commentaire</p>

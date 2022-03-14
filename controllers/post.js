@@ -5,7 +5,6 @@ const Likes = db.likes;
 const Comments = db.comments;
 const validator = require('validator');
 const { uploadErrors } = require('../utils/errors');
-const multer = require('../middleware/multerPost');
 
 
 module.exports.readPost = async (req, res) => {
@@ -20,27 +19,37 @@ module.exports.readPost = async (req, res) => {
 
 module.exports.createPost = async (req, res) => {
     let filename;
-
-    if(req.file !== null){
+    const { userId, message } = req.body
+    if(req.file !==null){
         try{
             if(
                 req.file.mimetype !== "image/jpg" && 
                 req.file.mimetype !== "image/jpeg" &&
-                req.file.mimetype !== "image/png"
+                req.file.mimetype !== "image/png" && 
+                req.file.mimetype !== "image/gif"
             )
             throw Error('invalid file');
+            if (req.file.size > 1100000) 
+                throw Error("max size")
+            
         }catch(err){
             const errors = uploadErrors(err)
-            return res.status(400).send({errors})
+            return res.status(201).json({errors})
         }
-        multer.storage = "test"
-        filename = req.originalUrl.split("=")[1] + req.file.originalname.split('.')[0] + '.png';
+        const MYME_TYPES = {
+            'image/jpg': 'jpg',
+            'image/jpeg': 'jpg',
+            'image/png': 'png',
+            'image/gif' : 'gif'
+        }
+        const extension = MYME_TYPES[req.file.mimetype];
+        const min = new Date()
+        filename = req.file.originalname.split(' ').join('_') + min.getMinutes() + '.' + extension;
     }
 
-    const { userId, message } = req.body
     const newPost = {
         userId: userId,
-        imagePost: req.file !== null ? "./uploads/posts/" + filename : "",
+        imagePost: req.file!== null ? "./uploads/posts/" + filename : "",
         message: message,
         likes: 0,
         comments: 0
