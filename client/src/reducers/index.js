@@ -5,7 +5,9 @@ import postsReducer from "./posts.reducer";
 import likesReducer from "./likes.reducer";
 import commentsReducer from "./comments.reducer"
 import errorsReducer from "./errors.reducer"
+import allPostsReducer from "./allPosts.reducer"
+import trendingReducer from "./trending.reducer"
 
 export default combineReducers({
-    userReducer, usersReducer, postsReducer, likesReducer, commentsReducer, errorsReducer
+    userReducer, usersReducer, postsReducer, likesReducer, commentsReducer, errorsReducer, allPostsReducer, trendingReducer
 })

@@ -3,7 +3,6 @@ import * as Icons from "react-icons/bi";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { UidContext } from "./AppContext";
-import AsideNav from "./AsideNav";
 import Logout from "./Log/Logout";
 
 const Navbar = () => {
@@ -20,7 +19,36 @@ const Navbar = () => {
             </div>
           </NavLink>
         </div>
-        <AsideNav />
+        <div className="left-nav-container">
+          <div className="icons">
+            <NavLink
+              to="/trending"
+              className={({ isActive }) =>
+                "" + (isActive ? "active-left-nav" : "")
+              }
+            >
+              <Icons.BiDonateHeart className="ico" />
+            </NavLink>
+            <br />
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                "" + (isActive ? "active-left-nav" : "")
+              }
+            >
+              <Icons.BiHome className="ico fav" />
+            </NavLink>
+            <br />
+            <NavLink
+              to="/profil"
+              className={({ isActive }) =>
+                "" + (isActive ? "active-left-nav" : "")
+              }
+            >
+              <Icons.BiUser className="ico" />
+            </NavLink>
+          </div>
+        </div>
         {uid ? (
           <ul>
             <li className="welcome">
