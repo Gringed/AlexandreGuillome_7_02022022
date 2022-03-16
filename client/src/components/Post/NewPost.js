@@ -63,7 +63,7 @@ const NewPost = () => {
         }
       };
     handleVideo();
-  }, [userData, message]);
+  }, [userData, message, image]);
   return (
     <div className="post-container">
       {isLoading ? (

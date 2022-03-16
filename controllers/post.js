@@ -20,7 +20,7 @@ module.exports.readPost = async (req, res) => {
 module.exports.createPost = async (req, res) => {
     let filename;
     const { userId, message } = req.body
-    if(req.file !==null){
+    if(req.file){
         try{
             if(
                 req.file.mimetype !== "image/jpg" && 
