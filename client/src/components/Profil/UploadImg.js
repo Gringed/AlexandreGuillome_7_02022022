@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { uploadAvatar } from "../../actions/user.actions";
-
+import * as Icons from 'react-icons/bi'
 const UploadImg = () => {
   const [file, setFile] = useState();
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const UploadImg = () => {
 
   return (
     <form onSubmit={handlePicture} className="upload-pic">
-      <label htmlFor="file">Changer d'image</label>
+      <label htmlFor="file" className="btn"><Icons.BiEdit /></label>
       <input
         type="file"
         id="file"
@@ -28,8 +28,8 @@ const UploadImg = () => {
         onChange={(e) => setFile(e.target.files[0])}
         required
       />
-      <br />
-      <input type="submit" value="Upload"/>
+      {file && <p>Photo choisie : <span className="photo-alt">{file.name}</span>.<br /> Sauvegarder pour afficher le changement</p>}
+      <input type="submit" disabled={!file} value="Upload"/>
       
     </form>
   );

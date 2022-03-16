@@ -1,22 +1,23 @@
 .home {
-  display: grid;
+  display: flex;
   max-width: 1200px;
-  grid-template-columns: 60px 1fr 374px;
+  width: 100%;
   overflow: hidden;
   margin: 58px auto 50px;
   position: relative;
 
   @media screen and(max-width: 990px) {
-    grid-template-columns: 60px 1fr;
+    
     margin: 58px 20px 50px
   }
 
   @media screen and(max-width: 590px) {
-    grid-template-columns: 1fr;
+    
     margin: 58px 8px 50px;
   }
 
   .main {
+    width: 70%;
     .home-header {
       margin: 0 auto 12px;
       text-align: center;
@@ -73,8 +74,8 @@
   }
   .right-side {
     position: relative;
-    width: 100%;
-    margin: 0px 0 0 14px;
+    
+    margin: 0px 0 0 15px;
 
     @media screen and(max-width: 990px) {
       display: none;
@@ -82,6 +83,7 @@
   
     .right-side-container {
       position: fixed;
+      width: 22rem;
     
     }
   }

@@ -1,55 +1,38 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { getTrends } from "../actions/posts.actions";
+import { getUsers } from "../actions/users.actions";
+import { dateParse } from "./Utils";
 
 const Trends = () => {
   const posts = useSelector((state) => state.allPostsReducer);
   const usersData = useSelector((state) => state.usersReducer);
-  const trendList = useSelector((state) => state.trendingReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (posts[0]) {
-      const postsArray = Object.keys(posts).map((i) => posts[i]);
-      let sortArray = postsArray.sort((a, b) => {
-        return b.likes - a.likes;
-      });
-      sortArray.length = 10;
-      dispatch(getTrends(sortArray));
-    }
-  }, [posts, dispatch]);
+    
+  }, [dispatch]);
 
   return (
     <div className="trending-container">
-      <h4>Populaires</h4>
-      <NavLink to="/trending">
+      <h4>Utilisateurs récents</h4>
+      <NavLink to="/users">
         <ul>
-          {trendList.length &&
-            trendList.map((post) => {
+          {usersData.sort((a, b) => {
+            return b.id-a.id
+            }) &&
+            usersData.map((userInfo) => {
               return (
-                <li key={post.id}>
+                <li key={userInfo.id}>
                   <div>
-                    {post.imagePost && (
-                      <img src={post.imagePost} alt="post pic" />
+                    {userInfo.avatar && (
+                      <img src={userInfo.avatar} alt="post pic" />
                     )}
-                    {post.imagePost === null && (
-                      <img
-                        src={
-                          usersData[0] &&
-                          usersData.map((user) => {
-                            if (user.id === post.userId) {
-                              return user.avatar
-                            }else return null
-                          }).join("")
-                        }
-                        alt="profil utilisateur"
-                      />
-                    )}
+                  
                   </div>
                   <div className="trend-content">
-                      <p>{!post.message ? <i>Ce post ne contient pas de texte</i> : post.message}</p>
-                      <span>Lire</span>
+                      <p>{userInfo.firstName} {userInfo.lastName}</p>
+                      <span>Inscrit le : {dateParse(userInfo.createdAt)}</span>
                   </div>
                 </li>
               );

@@ -33,6 +33,8 @@ export const addPost = (data) => {
       .then((res) => {
         if(res.data.errors) {
           dispatch({type: GET_POST_ERRORS, payload: res.data.errors})
+        }else {
+          dispatch({ type: GET_POST_ERRORS, payload: "" });
         }
       })
   };

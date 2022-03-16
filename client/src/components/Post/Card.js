@@ -92,8 +92,7 @@ const Card = ({ post }) => {
                   <div onClick={() => setIsUpdated(!isUpdated)}>
                     <Icons.BiEdit />
                   </div>
-                </div>
-                <div className="button-container">
+                
                   <div
                     onClick={() => {
                       if (
@@ -112,7 +111,7 @@ const Card = ({ post }) => {
             )}
             <div className="card-footer">
               <div className="comment-icon">
-                <Icons.BiCommentDetail onClick={() => setShowComment(!showComment)}/>
+                <Icons.BiCommentDetail className="ico" onClick={() => setShowComment(!showComment)}/>
                 <span>{post.comments}</span>
               </div>
               <LikeButton post={post} />

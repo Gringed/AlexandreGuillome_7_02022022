@@ -32,7 +32,7 @@ const Comment = ({ post, comment }) => {
   
   useEffect(() => {
    
-  }, []);
+  }, [dispatch]);
   return (
     <div className="comments-container">
       {commentsData ? (

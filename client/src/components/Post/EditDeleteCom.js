@@ -5,7 +5,7 @@ import { deleteComment, editComment, getPosts } from "../../actions/posts.action
 import { UidContext } from "../AppContext";
 import * as Icons from "react-icons/bi";
 
-const EditDeleteCom = ({ comment, postId }) => {
+const EditDeleteCom = ({ comment }) => {
   const [isAuthor, setIsAuthor] = useState(false);
   const [edit, setEdit] = useState(false);
   const [message, setMessage] = useState("");
@@ -18,7 +18,9 @@ const EditDeleteCom = ({ comment, postId }) => {
     if (message) {
       dispatch(editComment(comment.idPost, comment.id, message))
         .then(() => dispatch(getComments()))
-        .then(() => dispatch(getPosts()));
+        .then(() => dispatch(getPosts()))
+
+        
       setMessage("");
       setEdit(false);
     }
@@ -27,7 +29,8 @@ const EditDeleteCom = ({ comment, postId }) => {
   const handleDelete = () => {
       dispatch(deleteComment(comment.id, comment.idPost))
       .then(() => dispatch(getComments()))
-      .then(() => dispatch(getPosts()));
+      .then(() => dispatch(getPosts()))
+      
   };
 
   useEffect(() => {
@@ -37,7 +40,7 @@ const EditDeleteCom = ({ comment, postId }) => {
       }
     };
     checkAuthor();
-  }, [uid, comment.userId]);
+  }, [uid, comment.userId, dispatch]);
 
   return (
     <div className="edit-comment">

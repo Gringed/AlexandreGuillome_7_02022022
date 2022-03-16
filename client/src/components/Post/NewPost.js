@@ -15,14 +15,14 @@ const NewPost = () => {
   const errors = useSelector((state) => state.errorsReducer.postErrors);
   const dispatch = useDispatch();
 
-  const handlePost = async () => {
+  const handlePost = () => {
       if(message || image){
         const data = new FormData();
         data.append('userId', userData.id)
         data.append('message', message)
         if(file) data.append('image', file)
 
-       await dispatch(addPost(data))
+       dispatch(addPost(data))
         dispatch(getPosts());
         cancelPost();
         
@@ -40,7 +40,7 @@ const NewPost = () => {
     setMessage("");
     setImage("");
     setVideo("");
-    setFile(null);
+    setFile("");
   };
 
   useEffect(() => {
@@ -63,7 +63,7 @@ const NewPost = () => {
         }
       };
     handleVideo();
-  }, [userData, message, video, file]);
+  }, [userData, message]);
   return (
     <div className="post-container">
       {isLoading ? (
@@ -132,7 +132,7 @@ const NewPost = () => {
                     <input
                       type="file"
                       id="file-upload"
-                      name="file"
+                      name="image"
                       accept=".jpg, .png, .jpeg, .gif"
                       onChange={(e) => handleImage(e)}
                     />
