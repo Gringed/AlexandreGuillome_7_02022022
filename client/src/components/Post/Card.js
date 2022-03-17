@@ -86,18 +86,17 @@ const Card = ({ post }) => {
             {post.imagePost && (
               <img src={post.imagePost} alt="" className="card-pic" />
             )}
-            {userData.id === post.userId && (
+            {userData.id === post.userId || userData.isAdmin === true ? (
               <>
                 <div className="button-container">
                   <div onClick={() => setIsUpdated(!isUpdated)}>
                     <Icons.BiEdit />
                   </div>
-                
                   <div
                     onClick={() => {
                       if (
                         window.confirm(
-                          "Voulez vous vraiment supprimer votre post ?"
+                          "Voulez vous vraiment supprimer ce post ?"
                         )
                       ) {
                         deletePostUser();
@@ -108,7 +107,7 @@ const Card = ({ post }) => {
                   </div>
                 </div>
               </>
-            )}
+            ) : null}
             <div className="card-footer">
               <div className="comment-icon">
                 <Icons.BiCommentDetail className="ico" onClick={() => setShowComment(!showComment)}/>

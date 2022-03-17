@@ -6,7 +6,7 @@ import UpdateProfil from "../components/Profil/UpdateProfil";
 const Profil = () => {
   const uid = useContext(UidContext);
   return (
-    <div className="profil-page">
+    <div className="profil-page" id="top">
       {uid ? (
         <UpdateProfil />
       ) : (

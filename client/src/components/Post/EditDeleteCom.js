@@ -40,7 +40,7 @@ const EditDeleteCom = ({ comment }) => {
       }
     };
     checkAuthor();
-  }, [uid, comment.userId, dispatch]);
+  }, [uid, comment.id, dispatch]);
 
   return (
     <div className="edit-comment">

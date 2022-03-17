@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import * as Icons from "react-icons/bi";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import {HashLink} from 'react-router-hash-link'
 import { UidContext } from "./AppContext";
 import Logout from "./Log/Logout";
 
@@ -22,12 +23,12 @@ const Navbar = () => {
         <div className="left-nav-container">
           <div className="icons">
             <NavLink
-              to="/trending"
+              to="/users"
               className={({ isActive }) =>
                 "" + (isActive ? "active-left-nav" : "")
               }
             >
-              <Icons.BiDonateHeart className="ico" />
+              <Icons.BiListUl className="ico" />
             </NavLink>
             <br />
             <NavLink
@@ -40,7 +41,7 @@ const Navbar = () => {
             </NavLink>
             <br />
             <NavLink
-              to="/profil"
+              to="/profil#"
               className={({ isActive }) =>
                 "" + (isActive ? "active-left-nav" : "")
               }
@@ -49,26 +50,17 @@ const Navbar = () => {
             </NavLink>
           </div>
         </div>
-        {uid ? (
+        {uid && (
           <ul>
             <li className="welcome">
-              <NavLink to="/profil" className="navlink">
+              <HashLink to="/profil#" className="navlink">
                 <img src={`${userData.avatar}`} alt={userData.avatar} />
                 <p>
                   {userData.firstName} {userData.lastName}
                 </p>
-              </NavLink>
+              </HashLink>
             </li>
             <Logout />
-          </ul>
-        ) : (
-          <ul>
-            <li></li>
-            <li className="welcome">
-              <NavLink to="/profil">
-                <Icons.BiLogIn />
-              </NavLink>
-            </li>
           </ul>
         )}
       </div>

@@ -28,7 +28,7 @@
     img {
       height: 67px;
       width: 67px;
-      border-radius: 20px;
+      border-radius: 20px 0 0 20px;
       box-shadow: 1px 1px 3px rgba(51, 51, 51, 0.192);
       object-fit: cover;
       border: 2px solid $color-1;
@@ -56,7 +56,10 @@
     .card-header {
       display: flex;
       justify-content: space-between;
-      margin: 20px 0 15px 10px;
+      background: $color-3;
+      color: $white;
+      padding: 22px;
+      border-radius: 0 20px 0 0;
 
       @media screen and(max-width: 590px) {
         margin: 12px 0 14px;
@@ -117,8 +120,10 @@
       }
     }
     p {
-      margin: 10px 0 10px 10px;
       font-size: 1.1rem;
+      border: 2px solid $color-1;
+      border-radius: 0 0 20px 20px;
+      padding: 10px;
 
       @media screen and(max-width: 440px) {
         margin-top: -18px;
@@ -265,10 +270,11 @@
         margin-top: 8px;
       }
       .edit-comment {
-        color: $color-2;
-        img {
+        color: $color-3;
+        font-size: 1.7rem;
+        span {
           float: right;
-          margin-left: 10px;
+          margin: 5px 5px 2px 20px;
           cursor: pointer;
           transition: 0.15s;
           box-shadow: none;
@@ -277,6 +283,7 @@
 
           &:hover {
             transform: scale(1.1);
+            color: $color-1;
           }
         }
 

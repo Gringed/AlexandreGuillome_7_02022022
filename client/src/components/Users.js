@@ -1,11 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { getUsers } from "../actions/users.actions";
 import { dateParse } from "./Utils";
 
-const Trends = () => {
-  const posts = useSelector((state) => state.allPostsReducer);
+const Users = () => {
   const usersData = useSelector((state) => state.usersReducer);
   const dispatch = useDispatch();
 
@@ -43,4 +41,4 @@ const Trends = () => {
   );
 };
 
-export default Trends;
+export default Users;

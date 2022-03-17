@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Navbar from '../Navbar';
 import Home from '../../pages/Home';
 import Profil from '../../pages/Profil';
-import Trending from '../../pages/Trending';
+import Users from '../../pages/Users';
 const index = () => {
     return (
         <Router>
@@ -11,7 +11,7 @@ const index = () => {
             <Routes>
                 <Route path='/' exact element={<Home />} />
                 <Route path='/profil' exact element={<Profil />} />
-                <Route path='/trending' exact element={<Trending />} />
+                <Route path='/users' exact element={<Users />} />
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
         </Router>
