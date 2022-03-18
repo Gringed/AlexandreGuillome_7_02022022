@@ -36,7 +36,7 @@ const App = () => {
       {uid ? (
         <Routes />
       ) : loading ? (
-        <img src="https://www.atland-logement.fr/dist/assets/img/loading.gif"/> 
+        <img src="https://www.atland-logement.fr/dist/assets/img/loading.gif" alt="loading"/> 
       ) : (
         <div className="home">
           <div className="profil-page">

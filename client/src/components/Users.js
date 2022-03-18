@@ -13,7 +13,7 @@ const Users = () => {
 
   return (
     <div className="trending-container">
-      <h4>Utilisateurs récents</h4>
+      <h1>Utilisateurs récents</h1>
       <NavLink to="/users">
         <ul>
           {usersData.sort((a, b) => {
@@ -24,7 +24,7 @@ const Users = () => {
                 <li key={userInfo.id}>
                   <div>
                     {userInfo.avatar && (
-                      <img src={userInfo.avatar} alt="post pic" />
+                      <img src={userInfo.avatar} alt="" />
                     )}
                   
                   </div>

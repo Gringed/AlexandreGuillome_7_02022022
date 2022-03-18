@@ -290,14 +290,15 @@
         .edit-comment-form {
           margin-top: 14px;
           label {
-            background: $white;
-            color: $color-1;
+            background: $color-3;
+            color: $white;
             padding: 6px 12px 5px;
             border-radius: 20px 20px 20px 6px;
             cursor: pointer;
             transition: 0.2s;
             display: inline-block;
             font-family: $font-3;
+            font-size: 1.3rem;
 
             &:hover {
               transform: scale(1.05);
@@ -305,7 +306,8 @@
           }
           input[type="text"] {
             margin: 4px 0;
-            background: $white;
+            background: $color-1;
+            color: $white;
             font-size: 1.15rem;
             padding: 16px;
             width: 100%;

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getComments } from "../../actions/comments.actions";
 import { deleteComment, editComment, getPosts } from "../../actions/posts.actions";
 import { UidContext } from "../AppContext";
@@ -9,6 +9,7 @@ const EditDeleteCom = ({ comment }) => {
   const [isAuthor, setIsAuthor] = useState(false);
   const [edit, setEdit] = useState(false);
   const [message, setMessage] = useState("");
+  const userData = useSelector((state) => state.userReducer);
   const uid = useContext(UidContext);
   const dispatch = useDispatch();
 
@@ -40,11 +41,11 @@ const EditDeleteCom = ({ comment }) => {
       }
     };
     checkAuthor();
-  }, [uid, comment.id, dispatch]);
+  }, [uid, comment.id, comment.userId, dispatch]);
 
   return (
     <div className="edit-comment">
-      {isAuthor && edit === false && (
+      {(isAuthor || userData.isAdmin === true) && edit === false && (
         <>
           <span onClick={() => setEdit(!edit)}>
             <Icons.BiEditAlt />
@@ -64,10 +65,10 @@ const EditDeleteCom = ({ comment }) => {
           </span>
         </>
       )}
-      {isAuthor && edit && (
+      {(isAuthor || userData.isAdmin === true) && edit && (
         <form action="" onSubmit={handleEdit} className="edit-comment-form">
           <label htmlFor="text" onClick={() => setEdit(!edit)}>
-            Editer
+            Annuler
           </label>
           <br />
           <input

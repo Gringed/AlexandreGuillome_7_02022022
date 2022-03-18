@@ -13,7 +13,7 @@ const Navbar = () => {
     <nav>
       <div className="nav-container">
         <div className="logo">
-          <NavLink to="/">
+          <NavLink to="/" >
             <div className="logo">
               <img src="./img/icon.png" alt="home" />
               <h1>Groupomania</h1>
@@ -22,7 +22,7 @@ const Navbar = () => {
         </div>
         <div className="left-nav-container">
           <div className="icons">
-            <NavLink
+            <NavLink aria-label="lien vers tout les utilisateurs"
               to="/users"
               className={({ isActive }) =>
                 "" + (isActive ? "active-left-nav" : "")
@@ -32,7 +32,7 @@ const Navbar = () => {
             </NavLink>
             <br />
             <NavLink
-              to="/"
+              to="/" aria-label="lien vers l'accueil"
               className={({ isActive }) =>
                 "" + (isActive ? "active-left-nav" : "")
               }
@@ -40,7 +40,7 @@ const Navbar = () => {
               <Icons.BiHome className="ico fav" />
             </NavLink>
             <br />
-            <NavLink
+            <NavLink aria-label="lien vers le profil"
               to="/profil#"
               className={({ isActive }) =>
                 "" + (isActive ? "active-left-nav" : "")
@@ -53,8 +53,8 @@ const Navbar = () => {
         {uid && (
           <ul>
             <li className="welcome">
-              <HashLink to="/profil#" className="navlink">
-                <img src={`${userData.avatar}`} alt={userData.avatar} />
+              <HashLink to="/profil#" className="navlink" aria-label=" deuxième lien vers profil">
+                <img src={`${userData.avatar}`} alt="avatar de l'utilisateur" />
                 <p>
                   {userData.firstName} {userData.lastName}
                 </p>

@@ -13,6 +13,7 @@ const Card = ({ post }) => {
   const [showComment, setShowComment] = useState(false);
   const usersData = useSelector((state) => state.usersReducer);
   const userData = useSelector((state) => state.userReducer);
+  const postsData = useSelector((state) => state.postsReducer);
   const likesData = useSelector((state) => state.likesReducer);
   const dispatch = useDispatch();
 
@@ -29,7 +30,7 @@ const Card = ({ post }) => {
 
   useEffect(() => {
     usersData && setIsLoading(false);
-  }, [usersData, likesData]);
+  }, [usersData, likesData, postsData]);
 
   return (
     <li className="card-container" key={post.id}>
@@ -48,13 +49,13 @@ const Card = ({ post }) => {
                   })
                   .join("")
               }
-              alt="img de l'utilisateur qui a posté"
+              alt="Utilisateur qui a posté du contenu"
             />
           </div>
           <div className="card-right">
             <div className="card-header">
               <div className="pseudo">
-                <h3>
+                <div>
                   {usersData &&
                     usersData
                       .map((user) => {
@@ -63,7 +64,7 @@ const Card = ({ post }) => {
                         else return null;
                       })
                       .join("")}
-                </h3>
+                </div>
               </div>
               <span>{dateParse(post.createdAt)}</span>
             </div>

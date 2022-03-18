@@ -46,7 +46,9 @@
   .post-form {
     position: relative;
     margin: 0 auto 0;
-
+    .access-only{
+      display: none;
+    }
     textarea {
       height: 55px;
       width: 100%;

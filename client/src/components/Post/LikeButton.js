@@ -12,13 +12,13 @@ const LikeButton = ({ post }) => {
   const uid = useContext(UidContext);
   const dispatch = useDispatch();
 
-  const handleLike = () => {
-    dispatch(likePost(post.id, uid))
+  const handleLike = async () => {
+    await dispatch(likePost(post.id, uid))
     .then(() => dispatch(getPosts()))
     setLiked(true);
   };
-  const handleUnlike = () => {
-    dispatch(unLikePost(post.id, uid))
+  const handleUnlike = async () => {
+    await dispatch(unLikePost(post.id, uid))
     .then(() => dispatch(getPosts()))
     setLiked(false);
   };

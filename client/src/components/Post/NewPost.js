@@ -15,15 +15,15 @@ const NewPost = () => {
   const errors = useSelector((state) => state.errorsReducer.postErrors);
   const dispatch = useDispatch();
 
-  const handlePost = () => {
+  const handlePost = async () => {
       if(message || image){
         const data = new FormData();
         data.append('userId', userData.id)
         data.append('message', message)
         if(file) data.append('image', file)
 
-       dispatch(addPost(data))
-        dispatch(getPosts());
+       await dispatch(addPost(data))
+        dispatch(getPosts())
         cancelPost();
         
       }
@@ -87,6 +87,7 @@ const NewPost = () => {
           </div>
 
           <div className="post-form">
+            <label htmlFor="message" className="access-only">Message</label>
             <textarea
               name="message"
               id="message"
@@ -129,6 +130,7 @@ const NewPost = () => {
                 {!video && (
                   <>
                     <Icons.BiImages />
+                    <label htmlFor="file-upload" className="access-only">File</label>
                     <input
                       type="file"
                       id="file-upload"
