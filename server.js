@@ -37,7 +37,7 @@ app.use('/api/post', postRoutes);
 
 // Server entry
 db.sequelize.sync().then(() => {
-    app.listen(process.env.PORT || 3000, () => {
+    app.listen(process.env.PORT || 3001, () => {
         console.log(`Listening on port ${process.env.PORT}`)
     })
 })
