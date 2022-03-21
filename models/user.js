@@ -10,7 +10,7 @@ module.exports = (sequelize, Sequelize) => {
             notEmpty: true
         },
         firstName: {
-            type: Sequelize.BOOLEAN
+            type: Sequelize.STRING
         },
         lastName: {
             type: Sequelize.STRING
