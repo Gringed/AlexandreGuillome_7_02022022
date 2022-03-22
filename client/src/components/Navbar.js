@@ -20,12 +20,12 @@ const Navbar = () => {
             </div>
           </NavLink>
         </div>
-        <div className="left-nav-container">
+        <div className="top-nav-container">
           <div className="icons">
             <NavLink aria-label="lien vers tout les utilisateurs"
               to="/users"
               className={({ isActive }) =>
-                "" + (isActive ? "active-left-nav" : "")
+                "" + (isActive ? "active-top-nav" : "")
               }
             >
               <Icons.BiListUl className="ico" />
@@ -34,7 +34,7 @@ const Navbar = () => {
             <NavLink
               to="/" aria-label="lien vers l'accueil"
               className={({ isActive }) =>
-                "" + (isActive ? "active-left-nav" : "")
+                "" + (isActive ? "active-top-nav" : "")
               }
             >
               <Icons.BiHome className="ico fav" />
@@ -43,7 +43,7 @@ const Navbar = () => {
             <NavLink aria-label="lien vers le profil"
               to="/profil#"
               className={({ isActive }) =>
-                "" + (isActive ? "active-left-nav" : "")
+                "" + (isActive ? "active-top-nav" : "")
               }
             >
               <Icons.BiUser className="ico" />
