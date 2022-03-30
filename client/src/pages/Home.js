@@ -3,7 +3,7 @@ import { UidContext } from "../components/AppContext";
 import Log from "../components/Log";
 import Feed from "../components/Post/Feed";
 import NewPost from "../components/Post/NewPost";
-import Trends from "../components/Users";
+import UsersTrend from "../components/Users";
 
 const Home = () => {
   const uid = useContext(UidContext);
@@ -22,7 +22,7 @@ const Home = () => {
             <div className="right-side">
               <div className="right-side-container">
                 <div className="wrapper">
-                  <Trends />
+                  <UsersTrend />
                 </div>
               </div>
             </div>

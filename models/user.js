@@ -7,7 +7,10 @@ module.exports = (sequelize, Sequelize) => {
         },
         password: {
             type: Sequelize.STRING,
-            notEmpty: true
+            notEmpty: true,
+            validate: {
+                min: 6
+            }
         },
         firstName: {
             type: Sequelize.STRING

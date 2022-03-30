@@ -3,7 +3,6 @@ module.exports.signUpErrors = (err) => {
 
   if (err.message.includes("email")) errors.email = "Email incorrect";
 
-
   if (err.name === 'SequelizeUniqueConstraintError')
     errors.email = "Cet email est déjà enregistré";
 

@@ -103,6 +103,7 @@ const SignUpForm = () => {
           <input
             type="password"
             id="password"
+            minLength="6"
             className="password"
             onChange={(e) => setPassword(e.target.value)}
             value={password}

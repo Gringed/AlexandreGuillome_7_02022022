@@ -48,15 +48,14 @@ const UpdateProfil = () => {
           </h1>
           <br />
           <img src={userData.avatar} alt="User Profil" />
-          {/* <p>{errors.maxSize}</p>
-                <p>{errors.format}</p>   */}
+          
           <UploadImg />
           
         </div>
         
             <div className="background-posts">
               
-              {postsData.length  ? (
+              {postsData.length ? (
                 postsData.map((post) => {
                   if (post.userId === userData.id)
                   return <Card post={post} key={post.id} />;
