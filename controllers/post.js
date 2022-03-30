@@ -19,7 +19,7 @@ module.exports.readPost = async (req, res) => {
 
 module.exports.createPost = async (req, res) => {
     let filename;
-    const { userId, message } = req.body
+    const { userId, message, video } = req.body
     if(req.file){
         try{
             if(
@@ -51,6 +51,7 @@ module.exports.createPost = async (req, res) => {
         userId: userId,
         imagePost: req.file!== null ? "./uploads/posts/" + filename : "",
         message: message,
+        video: video,
         likes: 0,
         comments: 0
     }

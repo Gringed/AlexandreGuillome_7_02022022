@@ -46,7 +46,7 @@
   .post-form {
     position: relative;
     margin: 0 auto 0;
-    .access-only{
+    .access-only {
       display: none;
     }
     textarea {
@@ -73,6 +73,12 @@
           margin-left: 0;
         }
         .card-header {
+          display: flex;
+          justify-content: space-between;
+          background: $color-3;
+          color: $white;
+          padding: 22.5px;
+          border-radius: 0 20px 0 0;
           @media screen and(max-width: 632px) {
             flex-direction: column;
           }
@@ -99,10 +105,10 @@
           }
         }
         .content {
-          padding: 6px 0;
+          
           p {
             text-align: left;
-            margin: 2px 0 6px;
+            
             font-size: 1.1rem;
           }
           img {
@@ -154,6 +160,7 @@
           height: 35px;
           position: absolute;
           transform: translate(-16px, -34px);
+          -moz-transform : translate(-35px);
           opacity: 0;
           cursor: pointer;
 
@@ -161,7 +168,8 @@
             cursor: pointer;
           }
         }
-        &:hover{
+        
+        &:hover {
           transform: scale(1.1);
           transition: 0.2s;
           color: $white;
@@ -173,7 +181,6 @@
         color: red;
       }
       .btn-send {
-        
         button {
           color: $color-3;
           background: $white;
@@ -183,6 +190,12 @@
             background: $color-1;
             color: $white;
           }
+        }
+        button:disabled {
+          color: white;
+          cursor: initial;
+          opacity: 0.6;
+          background: rgb(194, 194, 194);
         }
         button {
           @media screen and(max-width: 460px) {

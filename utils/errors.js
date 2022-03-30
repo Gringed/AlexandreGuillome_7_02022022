@@ -28,7 +28,7 @@ module.exports.uploadErrors = (err) => {
     errors.format = "Le fichier n'est pas pris en charge";
 
   if (err.message.includes("max size"))
-    errors.maxSize = "Le fichier dépasse 1,1 Mo";
+    errors.maxSize = "Le fichier dépasse 600Ko";
 
   return errors;
 };

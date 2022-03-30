@@ -10,30 +10,29 @@ const NewPost = () => {
   const [message, setMessage] = useState("");
   const [image, setImage] = useState("");
   const [video, setVideo] = useState("");
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState("");
   const userData = useSelector((state) => state.userReducer);
-  const errors = useSelector((state) => state.errorsReducer.postErrors);
+  const [errors, setErrors] = useState("");
   const dispatch = useDispatch();
 
   const handlePost = async () => {
-      if(message || image){
-        const data = new FormData();
-        data.append('userId', userData.id)
-        data.append('message', message)
-        if(file) data.append('image', file)
+    if (message || image || video) {
+      const data = new FormData();
+      data.append("userId", userData.id);
+      data.append("message", message);
+      if (file) data.append("image", file);
+      data.append("video", video);
 
-       await dispatch(addPost(data))
-        dispatch(getPosts())
-        cancelPost();
-        
-      }
-      else alert("Veuillez entrez un message")
+      await dispatch(addPost(data));
+      dispatch(getPosts());
+      cancelPost();
+    } else alert("Veuillez entrez un message");
   };
 
   const handleImage = (e) => {
-      setImage(URL.createObjectURL(e.target.files[0]));
-    setFile(e.target.files[0])
-    setVideo('')
+    setImage(URL.createObjectURL(e.target.files[0]));
+    setFile(e.target.files[0]);
+    setVideo("");
   };
 
   const cancelPost = () => {
@@ -41,6 +40,7 @@ const NewPost = () => {
     setImage("");
     setVideo("");
     setFile("");
+    setErrors("");
   };
 
   useEffect(() => {
@@ -48,22 +48,22 @@ const NewPost = () => {
       setIsLoading(false);
     }
     const handleVideo = () => {
-        let findLink = message.split(" ");
-        for (let i = 0; i < findLink.length; i++) {
-          if (
-            findLink[i].includes("https://www.yout") ||
-            findLink[i].includes("https://yout")
-          ) {
-            let embed = findLink[i].replace("watch?v=", "embed/");
-            setVideo(embed.split("&")[0]);
-            findLink.splice(i, 1)
-            setMessage(findLink.join(" "))
-            setImage('')
-          }
+      let findLink = message.split(" ");
+      for (let i = 0; i < findLink.length; i++) {
+        if (
+          findLink[i].includes("https://www.yout") ||
+          findLink[i].includes("https://yout")
+        ) {
+          let embed = findLink[i].replace("watch?v=", "embed/");
+          setVideo(embed.split("&")[0]);
+          findLink.splice(i, 1);
+          setMessage(findLink.join(" "));
+          setImage("");
         }
-      };
+      }
+    };
     handleVideo();
-  }, [userData, message, image]);
+  }, [userData, message, video]);
   return (
     <div className="post-container">
       {isLoading ? (
@@ -87,7 +87,9 @@ const NewPost = () => {
           </div>
 
           <div className="post-form">
-            <label htmlFor="message" className="access-only">Message</label>
+            <label htmlFor="message" className="access-only">
+              Message
+            </label>
             <textarea
               name="message"
               id="message"
@@ -101,7 +103,7 @@ const NewPost = () => {
                   <img src={userData.avatar} alt="avatar utilisateur" />
                 </div>
                 <div className="card-right">
-                  <div className="cart-header">
+                  <div className="card-header">
                     <div className="pseudo">
                       <h3>
                         {userData.firstName} {userData.lastName}
@@ -130,10 +132,12 @@ const NewPost = () => {
                 {!video && (
                   <>
                     <Icons.BiImages />
-                    <label htmlFor="file-upload" className="access-only">File</label>
+                    <label htmlFor="image" className="access-only">
+                      File
+                    </label>
                     <input
                       type="file"
-                      id="file-upload"
+                      id="image"
                       name="image"
                       accept=".jpg, .png, .jpeg, .gif"
                       onChange={(e) => handleImage(e)}
@@ -144,15 +148,37 @@ const NewPost = () => {
                   <button onClick={() => setVideo("")}>Supprimer vidéo</button>
                 )}
               </div>
-              {errors.format && <p>{errors.format}</p>}
-              {errors.maxSize && <p>{errors.maxSize}</p>}
+              {file ? (
+                file.type !== "image/jpeg" &&
+                file.type !== "image/jpg" &&
+                file.type !== "image/png" &&
+                file.type !== "image/gif" ? (
+                  <p>Format incorrect <b>(.png, .jpg, .jpeg acceptés)</b></p>
+                ) : file.size > 600000 ? (
+                  <p>
+                    Le fichier dépasse <b>600Ko</b>
+                  </p>
+                ) : null
+              ) : null}
               <div className="btn-send">
                 {message || image || video.length > 20 ? (
-                  <button className="cancer" onClick={cancelPost}>
+                  <button className="cancel" onClick={cancelPost}>
                     Annuler
                   </button>
                 ) : null}
-                <button className="send" onClick={handlePost}>
+                <button
+                  className="send"
+                  disabled={
+                    !message &&
+                    !video &&
+                    (file.type !== "image/jpeg" &&
+                    file.type !== "image/jpg" &&
+                    file.type !== "image/png" &&
+                    file.type !== "image/gif")
+                    || file.size > 600000
+                  }
+                  onClick={handlePost}
+                >
                   Envoyer
                 </button>
               </div>

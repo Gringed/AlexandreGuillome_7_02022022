@@ -7,6 +7,9 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             notEmpty: true
         },
+        video: {
+            type: Sequelize.STRING,
+        },
         likes: {
             type: Sequelize.INTEGER
         },

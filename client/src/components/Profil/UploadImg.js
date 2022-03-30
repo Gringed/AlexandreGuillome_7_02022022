@@ -16,8 +16,9 @@ const UploadImg = () => {
 
     dispatch(uploadAvatar(data, userData.id))
   };
-
+  
   return (
+    
     <form onSubmit={handlePicture} className="upload-pic">
       <label htmlFor="file" className="btn"><Icons.BiEdit /></label>
       <input
@@ -28,8 +29,14 @@ const UploadImg = () => {
         onChange={(e) => setFile(e.target.files[0])}
         required
       />
-      {file && <p>Photo choisie : <span className="photo-alt">{file.name}</span>.<br /> Sauvegarder pour afficher le changement</p>}
-      <input type="submit" disabled={!file} value="Upload"/>
+      {file ? 
+        file.type !== "image/jpeg" && file.type !== "image/jpg" && file.type !== "image/png" ?  
+        <p>Format incorrect <b>(.png, .jpg, .jpeg acceptés)</b></p> 
+        : file.size > 600000 ? <p>Le fichier dépasse <b>600Ko</b></p> :
+        <p>Photo choisie : <span className="photo-alt">{file.name}</span>.<br /> Sauvegarder pour afficher le changement</p> 
+        : null}
+       
+      <input type="submit" disabled={!file || (file.type !== "image/jpeg" && file.type !== "image/jpg" && file.type !== "image/png") || file.size > 600000} value="Upload"/>
       
     </form>
   );

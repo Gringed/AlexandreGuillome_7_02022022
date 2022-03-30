@@ -87,6 +87,17 @@ const Card = ({ post }) => {
             {post.imagePost && (
               <img src={post.imagePost} alt="" className="card-pic" />
             )}
+            {post.video && (
+              <iframe
+                width="500"
+                height="300"
+                src={post.video}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                title={post.id}
+              ></iframe>
+            )}
             {userData.id === post.userId || userData.isAdmin === true ? (
               <>
                 <div className="button-container">
