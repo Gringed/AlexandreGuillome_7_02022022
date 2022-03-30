@@ -30,7 +30,7 @@ const Navbar = () => {
             >
               <Icons.BiListUl className="ico" />
             </NavLink>
-            <br />
+            
             <NavLink
               to="/" aria-label="lien vers l'accueil"
               className={({ isActive }) =>
@@ -39,7 +39,7 @@ const Navbar = () => {
             >
               <Icons.BiHome className="ico fav" />
             </NavLink>
-            <br />
+            
             <NavLink aria-label="lien vers le profil"
               to="/profil#"
               className={({ isActive }) =>

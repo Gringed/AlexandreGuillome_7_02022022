@@ -23,6 +23,10 @@
     .user-container {
       margin: 20px;
       width: 70%;
+      @media screen and(max-width: 940px) {
+    width: 100%;
+   
+      }
     }
   }
   h4 {
@@ -75,6 +79,9 @@
           font-family: $font-3;
           display: flex;
           font-size: 0.8em;
+          @media screen and(max-width: 640px) {
+    display: none;
+          }
         }
         button {
           background: $white;

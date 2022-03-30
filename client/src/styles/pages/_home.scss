@@ -5,18 +5,20 @@
   margin: 58px auto 50px;
   position: relative;
 
-  @media screen and(max-width: 990px) {
+  @media screen and(max-width: 1180px) {
     
-    margin: 58px 20px 50px
+    display: flex;
+    justify-content: center;
   }
 
-  @media screen and(max-width: 590px) {
-    
-    margin: 58px 8px 50px;
-  }
 
   .main {
     width: 70%;
+    @media screen and(max-width: 1180px) {
+    
+      width: 95%;
+      margin: 0;
+    }
     .home-header {
       margin: 0 auto 12px;
       text-align: center;
@@ -76,7 +78,7 @@
     
     margin: 0px 0 0 15px;
 
-    @media screen and(max-width: 990px) {
+    @media screen and(max-width: 1180px) {
       display: none;
     }
   

@@ -39,6 +39,9 @@ nav {
         transform: translate(15px, 0);
         font-size: 2rem;
         font-family: $font-3;
+        @media screen and(max-width: 690px) {
+    display: none;
+        }
       }
       img {
         height: 35px;
@@ -59,7 +62,7 @@ nav {
       font-size: 1.2rem;
 
       .welcome {
-        @media screen and(max-width: 590px) {
+        @media screen and(max-width: 690px) {
           display: none;
         }
 
@@ -74,6 +77,9 @@ nav {
         align-items: center;
         margin-left: 20px;
         transition: 0.15s ease;
+        @media screen and(max-width: 690px) {
+    margin-left: 0;
+        }
 
         .navlink {
           text-decoration: none;
@@ -117,8 +123,8 @@ nav {
     .top-nav-container {
       display: flex;
     
-        @media screen and(max-width: 590px) {
-          margin: 2px 0 0 -9px;
+        @media screen and(max-width: 690px) {
+          margin: 2px -4px 0 4px;
         }
     
         .icons {
@@ -126,6 +132,9 @@ nav {
           font-size: 2.5rem;
           color: black;
           align-items: center;
+          @media screen and(max-width: 590px) {
+            align-items:baseline;
+          }
           .ico{
             color: $color-3;
           }
