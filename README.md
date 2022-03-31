@@ -7,12 +7,16 @@ _________________________
 
 * Installation des dépendances nécessaire : `npm i -s bcrypt cookie-parser cors dotenv express jsonwebtoken multer mysql2 nodemon sequelize validator`
 
-* Mettez vos informations de **Base de données** dans `/config/db.js`
+* Créez la base de données manuellement (ici : `groupomaniav2`) *
+
 * Créez le fichier `.env` dans `/config/` avec les données suivantes :
    - PORT=3001 `votre port localhost`
    - CLIENT_URL=http://localhost:3000 `votre URL client`
-   - USER=root `votre identifiant`
-   - PASSWORD= `votre mot de passe`
+   - DB_HOST=localhost `votre host (ici localhost pour le local)`
+   - DB_USER=root `votre identifiant`
+   - DB_PASSWORD= `votre mot de passe`
+   - DB_PORT=3306 `votre port de base de données (ici 3306 pour windows)`
+   - DB_DBNAME=groupomaniav2 `nom de votre base de données`
    - TOKEN_SECRET=1321345643035356457979243 `votre clé secrète aléatoire`
 _________________________
 
