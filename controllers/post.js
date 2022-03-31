@@ -29,7 +29,7 @@ module.exports.createPost = async (req, res) => {
                 req.file.mimetype !== "image/gif"
             )
             throw Error('invalid file');
-            if (req.file.size > 1100000) 
+            if (req.file.size > 600000) 
                 throw Error("max size")
             
         }catch(err){

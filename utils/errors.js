@@ -6,6 +6,9 @@ module.exports.signUpErrors = (err) => {
   if (err.name === 'SequelizeUniqueConstraintError')
     errors.email = "Cet email est déjà enregistré";
 
+    if (err.message.includes("password"))
+    errors.email = "6 caractères minimum";
+
   return errors;
 };
 

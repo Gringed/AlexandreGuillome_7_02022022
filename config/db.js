@@ -1,10 +1,11 @@
 const Sequelize = require('sequelize');
 require('dotenv').config({ path: './config/.env' })
 const dbConfig = {
-    HOST: "localhost",
-    USER: process.env.USER,
-    PASSWORD: process.env.PASSWORD,
-    DB: "groupomaniav2",
+    DB_HOST: process.env.DB_HOST,
+    DB_USER: process.env.DB_USER,
+    DB_PASSWORD: process.env.DB_PASSWORD,
+    DB_DBNAME: process.env.DB_DBNAME,
+    DB_PORT: process.env.DB_PORT,
     dialect: "mysql",
     pool: {
         max: 5,
@@ -14,11 +15,11 @@ const dbConfig = {
     }
 }
 
-const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
-    host: dbConfig.HOST,
+const sequelize = new Sequelize(dbConfig.DB_DBNAME, dbConfig.DB_USER, dbConfig.DB_PASSWORD, {
+    host: dbConfig.DB_HOST,
     dialect: dbConfig.dialect,
     operatorsAliases: 0,
-
+    port: dbConfig.DB_PORT,
     pool: {
         max: dbConfig.pool.max,
         min: dbConfig.pool.min,
